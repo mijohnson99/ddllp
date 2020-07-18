@@ -31,7 +31,7 @@ typedef struct prod {
 	Term type;				// Term type; indicates value
 	union {
 		struct {
-			Rule origin;		// Rule number
+			Rule origin;
 			struct prod *arr;	// Array of productions
 		} rule; // TODO: Think of a better name for this member
 		long int i;			// Integer
@@ -59,7 +59,7 @@ char *input_stream; // String input
 
 int terminal_satisfied(Term);
 // Check input stream for a valid sequence for Term; return length if found
-Production *consume_terminal(Term);
+Production *consume_terminal(Term, Production *);
 // Create a Production for a Term from input, advancing the stream
 
 // NB. Whether whitespace is ignored or not depends on the implementations of terminal_satisfied and consume_terminal.
@@ -68,7 +68,7 @@ Production *consume_terminal(Term);
 
 int term_satisfied(Term);
 // Check each rule (or terminal_satisfied) for a given term; return length if found
-Production *consume_term(Term);
+Production *consume_term(Term, Production *);
 // Creates a Production for a Term from input_stream, advancing the stream 
 // TODO: How will this function know which Rule to follow?
 //       Idea: Have term_satisfied return Rule AND length
